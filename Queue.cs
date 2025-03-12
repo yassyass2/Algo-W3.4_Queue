@@ -7,24 +7,39 @@ public class Queue<T> : IQueue<T>
     private T[] data;
     private int _count = 0;
 
-    public bool Empty => throw new NotImplementedException();
-    public bool Full => throw new NotImplementedException();
-    public int Count => throw new NotImplementedException();
-    public int Size => throw new NotImplementedException();
+    public bool Empty => Count == 0;
+    public bool Full => Count == Size;
+    public int Count{get; set; }
+    public int Size{get; }
 
     public Queue(int capacity = 5)
     {
-        throw new NotImplementedException();
+        Size = capacity;
+        data = new(capacity);
+        back = -1;
+        front = -1;
+        Count = 0;
     }
 
     public void Enqueue(T element)
     {
-        throw new NotImplementedException();
+        if (element != null && data.Length > 0){
+            front = front < capacity-1 ? front+1 : 0;
+            data[front] = element;
+            Count++;
+        }
+        
     }
 
     public T? Dequeue()
     {
-        throw new NotImplementedException();
+        if (element != null && data.Length > 0){
+            back = back < capacity-1 ? back+1 : 0;
+            var temp = data[back];
+            data[back] = null;
+            Count--;
+            return temp;
+        }
     }
 
 }
