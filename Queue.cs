@@ -23,7 +23,7 @@ public class Queue<T> : IQueue<T>
 
     public void Enqueue(T element)
     {
-        if (element != default && data.Length > 0){
+        if (data.Length > 0){
             front = front < Size-1 ? front+1 : 0;
             data[front] = element;
             Count++;
