@@ -15,7 +15,7 @@ public class Queue<T> : IQueue<T>
     public Queue(int capacity = 5)
     {
         Size = capacity;
-        data = new(capacity);
+        data = new T[capacity];
         back = -1;
         front = -1;
         Count = 0;
@@ -23,8 +23,8 @@ public class Queue<T> : IQueue<T>
 
     public void Enqueue(T element)
     {
-        if (element != null && data.Length > 0){
-            front = front < capacity-1 ? front+1 : 0;
+        if (element != default && data.Length > 0){
+            front = front < Size-1 ? front+1 : 0;
             data[front] = element;
             Count++;
         }
@@ -33,13 +33,14 @@ public class Queue<T> : IQueue<T>
 
     public T? Dequeue()
     {
-        if (element != null && data.Length > 0){
-            back = back < capacity-1 ? back+1 : 0;
+        if (data.Length > 0 && !Empty){
+            back = back < Size-1 ? back+1 : 0;
             var temp = data[back];
-            data[back] = null;
+            data[back] = default(T);
             Count--;
             return temp;
         }
+        return default;
     }
 
 }
